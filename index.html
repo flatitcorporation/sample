@@ -35,16 +35,20 @@
 
   <script>
     // 初期化
-    liff.init({ liffId: "ここに発行されたミニアプリIDを入れる" })
+    liff.init({ liffId: "2008201805-PGBGjWpK" })
       .then(() => {
         if (!liff.isLoggedIn()) {
-          liff.login(); // 未ログインならLINEログイン画面へ
+          liff.login();
+        } else {
+          document.getElementById("btn").onclick = async () => {
+            try {
+              const profile = await liff.getProfile();
+              alert(`こんにちは ${profile.displayName} さん！\nLINE ID: ${profile.userId}`);
+            } catch (e) {
+              console.error("getProfile error", e);
+            }
+          };
         }
-
-        document.getElementById("btn").onclick = async () => {
-          const profile = await liff.getProfile();
-          alert(`こんにちは ${profile.displayName} さん！\nLINE ID: ${profile.userId}`);
-        };
       })
       .catch(err => {
         console.error("LIFF init error", err);

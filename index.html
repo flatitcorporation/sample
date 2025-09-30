@@ -4,6 +4,30 @@
   <meta charset="UTF-8">
   <title>My Mini App</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-size: 20px;   /* 全体の文字サイズを大きめに */
+      padding: 20px;
+      text-align: center; /* 中央揃え */
+    }
+    h1 {
+      font-size: 28px;   /* 見出しはさらに大きく */
+      margin-bottom: 30px;
+    }
+    button {
+      font-size: 22px;   /* ボタンの文字も大きく */
+      padding: 15px 30px;
+      border-radius: 8px;
+      border: none;
+      background-color: #06C755; /* LINEカラー風の緑 */
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #05a84a; /* ホバー時少し濃く */
+    }
+  </style>
 </head>
 <body>
   <h1>ログインテスト</h1>
@@ -11,7 +35,7 @@
 
   <script>
     // 初期化
-    liff.init({ liffId: "2008201805-PGBGjWpK" })
+    liff.init({ liffId: "ここに発行されたミニアプリIDを入れる" })
       .then(() => {
         if (!liff.isLoggedIn()) {
           liff.login(); // 未ログインならLINEログイン画面へ
@@ -20,7 +44,6 @@
         document.getElementById("btn").onclick = async () => {
           const profile = await liff.getProfile();
           alert(`こんにちは ${profile.displayName} さん！\nLINE ID: ${profile.userId}`);
-          // Dataverseにprofile.userIdを送信してユーザー認証に利用
         };
       })
       .catch(err => {

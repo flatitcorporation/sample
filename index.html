@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Mini App</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h1>ログインテスト</h1>
+  <button id="btn">プロフィール取得</button>
+
+  <script>
+    // 初期化
+    liff.init({ liffId: "2008201805-PGBGjWpK" })
+      .then(() => {
+        if (!liff.isLoggedIn()) {
+          liff.login(); // 未ログインならLINEログイン画面へ
+        }
+
+        document.getElementById("btn").onclick = async () => {
+          const profile = await liff.getProfile();
+          alert(`こんにちは ${profile.displayName} さん！\nLINE ID: ${profile.userId}`);
+          // Dataverseにprofile.userIdを送信してユーザー認証に利用
+        };
+      })
+      .catch(err => {
+        console.error("LIFF init error", err);
+      });
+  </script>
+</body>
+</html>
